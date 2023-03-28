@@ -10,23 +10,26 @@ class Ball {
     }
     triangulate() {
         this.dist = []
-        for (let i = 0; i < 1; i++) {
+        let shortestDist = []
+        for (let i = 0; i < balls.length; i++) {
             for (let j = i + 1; j < balls.length; j++) {
                 let distX = this.x - balls[j].x;
                 let distY = this.y - balls[j].y;
                 this.dist.push(sqrt((distX * distX) + (distY * distY)));
                 // console.log(this.dist)
                 // break
+            
+                shortestDist.push(this.dist.reduce((accum, dist) => {
+                    if ((accum || 0) > dist) {
+                        return dist
+                    }
+                    else {
+                        return accum
+                    }
+                })
+                )
             }
-            let shortestDist = this.dist.reduce((accum, dist) => {
-                if ((accum || 0) > dist) {
-                    return dist
-                }
-                else {
-                    return accum
-                }
-            })
-            console.log(shortestDist)
+            console.log(shortestDist[i]);
         }
     }
 
